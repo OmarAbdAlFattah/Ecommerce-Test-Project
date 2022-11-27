@@ -7,15 +7,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "customer")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "customer")
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "customer_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
     private String name;

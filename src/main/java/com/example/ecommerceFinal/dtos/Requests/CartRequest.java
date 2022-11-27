@@ -5,11 +5,7 @@ public class CartRequest {
     private Long id;
     private short totalPrice;
     private short totalQuantity;
-    private Long customerId;
 
-    public Long getCustomerId() {
-        return customerId;
-    }
     public Long getId() {
         return id;
     }

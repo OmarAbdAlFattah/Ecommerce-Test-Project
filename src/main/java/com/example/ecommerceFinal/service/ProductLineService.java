@@ -17,7 +17,6 @@ public class ProductLineService {
 
     public void addNewProductLine(ProductLineRequest productLineRequest){
         ProductLine productLine = new ProductLine();
-        productLine.setProduct(new Product(productLineRequest.getProductId()));
         productLine.setQuantity(productLineRequest.getQuantity());
         productLineRepo.save(productLine);
     }

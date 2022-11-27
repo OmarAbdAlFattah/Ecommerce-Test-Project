@@ -16,8 +16,11 @@ public class CustomerService {
 
     public void addNewCustomer(CustomerRequest customerRequest){
         Customer customer = new Customer();
-        customer.setName(customerRequest.get_name());
-        customer.setEmail(customerRequest.get_email());
+        System.out.println("CUSTOMER NAME IS " + customerRequest.getName());
+
+        customer.setName(customerRequest.getName());
+        customer.setEmail(customerRequest.getEmail());
+        System.out.println("CUSTOMER EMAIL IS " + customerRequest.getEmail());
         customerRepo.save(customer);
     }
 }
