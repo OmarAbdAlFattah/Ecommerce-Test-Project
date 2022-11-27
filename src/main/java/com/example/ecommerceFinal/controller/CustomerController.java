@@ -18,8 +18,6 @@ public class CustomerController {
     }
     @PostMapping("/add")
     public void addCustomer(@RequestBody CustomerRequest customerRequest){
-        System.out.println(customerRequest.getEmail());
-        System.out.println(customerRequest.getName());
         customerService.addNewCustomer(customerRequest);
     }
 }

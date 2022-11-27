@@ -17,7 +17,7 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public void addCart(@RequestBody CartRequest cartRequest){
         cartService.addCart(cartRequest);
     }

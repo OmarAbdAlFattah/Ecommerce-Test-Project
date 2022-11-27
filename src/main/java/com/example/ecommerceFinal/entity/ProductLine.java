@@ -15,6 +15,7 @@ public class ProductLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private short quantity;
     @ManyToOne
     @JoinColumn(name = "cart_id")
@@ -23,5 +24,12 @@ public class ProductLine {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    public short getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(short quantity) {
+        this.quantity = quantity;
+    }
 
 }
