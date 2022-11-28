@@ -23,13 +23,4 @@ public class ProductLine {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
-    public short getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(short quantity) {
-        this.quantity = quantity;
-    }
-
 }
