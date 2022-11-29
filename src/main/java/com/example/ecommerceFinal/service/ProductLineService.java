@@ -1,11 +1,13 @@
 package com.example.ecommerceFinal.service;
 
 import com.example.ecommerceFinal.dtos.Requests.ProductLineRequest;
+import com.example.ecommerceFinal.dtos.Requests.ProductToProductLineDTO;
 import com.example.ecommerceFinal.dtos.Responses.ProductLineResponse;
+import com.example.ecommerceFinal.entity.Product;
 import com.example.ecommerceFinal.entity.ProductLine;
+import com.example.ecommerceFinal.repos.ProductLineRepo;
+import com.example.ecommerceFinal.repos.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +17,13 @@ import java.util.Optional;
 @Service
 public class ProductLineService {
     private final com.example.ecommerceFinal.repos.ProductLineRepo productLineRepo;
+    private final com.example.ecommerceFinal.repos.ProductRepo productRepo;
     @Autowired
-    public ProductLineService(com.example.ecommerceFinal.repos.ProductLineRepo productLineRepo) {
+    public ProductLineService(ProductLineRepo productLineRepo, ProductRepo productRepo) {
         this.productLineRepo = productLineRepo;
+        this.productRepo = productRepo;
     }
+
 
     public void addNewProductLine(ProductLineRequest productLineRequest){
         ProductLine productLine = new ProductLine();
@@ -56,5 +61,14 @@ public class ProductLineService {
             productLineRepo.findById(id).get();
             productLineRepo.deleteById(id);
         }catch (NoSuchElementException e){}
+    }
+
+    public void saveProductToProductLine(ProductToProductLineDTO productToProductLineDTO) {
+        Product product = productRepo.findById(productToProductLineDTO.getProductId()).get();
+        ProductLine productLine = new ProductLine();
+
+        productLine.setQuantity(productToProductLineDTO.getQuantity());
+        productLine.setProduct(product);
+        productLineRepo.save(productLine);
     }
 }
