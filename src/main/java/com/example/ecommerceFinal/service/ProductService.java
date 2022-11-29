@@ -43,7 +43,7 @@ public class ProductService {
             productResponse.setPrice(foundProduct.getPrice());
             return productResponse;
         }
-        System.err.println("COULDN'T FIND product IN DATABASE!");
+        System.err.println("COULDN'T FIND product  " + id + "IN DATABASE!");
         return null;
     }
 

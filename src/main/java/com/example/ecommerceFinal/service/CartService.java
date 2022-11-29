@@ -1,9 +1,13 @@
 package com.example.ecommerceFinal.service;
 
 import com.example.ecommerceFinal.dtos.Requests.CartRequest;
+import com.example.ecommerceFinal.dtos.Requests.ProductLineCartTransfereDTO;
 import com.example.ecommerceFinal.dtos.Responses.CartResponse;
 import com.example.ecommerceFinal.entity.Cart;
+import com.example.ecommerceFinal.entity.Customer;
+import com.example.ecommerceFinal.entity.ProductLine;
 import com.example.ecommerceFinal.repos.CartRepo;
+import com.example.ecommerceFinal.repos.ProductLineRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +17,13 @@ import java.util.Optional;
 
 @Service
 public class CartService {
-    private final CartRepo cartRepo;
     @Autowired
-    public CartService(CartRepo cartRepo) {
+    private final CartRepo cartRepo;
+    private final ProductLineRepo productLineRepo;
+    @Autowired
+    public CartService(CartRepo cartRepo, ProductLineRepo productLineRepo) {
         this.cartRepo = cartRepo;
+        this.productLineRepo = productLineRepo;
     }
 
     public void addCart(CartRequest cartRequest){
@@ -40,7 +47,7 @@ public class CartService {
             cartResponse.setTotalQuantity(foundCart.getTotalQuantity());
             return cartResponse;
         }
-        System.err.println("COULDN'T FIND cart IN DATABASE");
+        System.err.println("COULDN'T FIND cart " + id + "IN DATABASE");
         return null;
     }
 
@@ -58,5 +65,20 @@ public class CartService {
             cartRepo.findById(id);
             cartRepo.deleteById(id);
         } catch (NoSuchElementException e){}
+    }
+
+    public void addCustomerToCart(Customer customer) {
+        Cart cart = new Cart();
+        cart.setCustomer(customer);
+        cartRepo.save(cart);
+    }
+
+    public void saveProductLineToCart(ProductLineCartTransfereDTO productLineCartTransfereDTO) {
+        Cart cart = cartRepo.findById(productLineCartTransfereDTO.getCartId()).orElseThrow(() ->new IllegalStateException("cart with this ID doesn't exist"));
+        ProductLine productLine = productLineRepo.findById(productLineCartTransfereDTO.getProductLineId()).orElseThrow(() ->new IllegalStateException("PRODUCT_LINE with this ID dowsn't exist"));
+        cart.getListOfProductLines().add(productLine);
+        productLine.setCart(cart);
+        cartRepo.save(cart);
+        productLineRepo.save(productLine);
     }
 }

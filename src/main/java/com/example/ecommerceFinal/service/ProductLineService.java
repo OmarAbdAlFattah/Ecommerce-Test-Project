@@ -34,6 +34,8 @@ public class ProductLineService {
             productLineResponse.setQuantity(foundProductLine.getQuantity());
             return productLineResponse;
         }
+        System.err.println("COULNND'NT FIND product_line with id " + id + "IN DATABASE");
+
         return null;
     }
 

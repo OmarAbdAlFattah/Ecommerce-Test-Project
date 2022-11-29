@@ -1,6 +1,7 @@
 package com.example.ecommerceFinal.controller;
 
 import com.example.ecommerceFinal.dtos.Requests.ProductLineRequest;
+//import com.example.ecommerceFinal.dtos.Requests.ProductToProductLineDTO;
 import com.example.ecommerceFinal.dtos.Responses.ProductLineResponse;
 import com.example.ecommerceFinal.entity.ProductLine;
 import com.example.ecommerceFinal.service.ProductLineService;
@@ -24,6 +25,9 @@ public class ProductLineController {
     public void addProductLine(@RequestBody ProductLineRequest productLineRequest){
         productLineService.addNewProductLine(productLineRequest);
     }
+
+//    @PostMapping("/saveProductToProductLine")
+//    public void saveProductToProductLine(@RequestBody ProductToProductLineDTO productToProductLineDTO ){}
 
     @GetMapping("")
     public ResponseEntity<List<ProductLine>> list(){

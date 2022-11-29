@@ -1,6 +1,7 @@
 package com.example.ecommerceFinal.controller;
 
 import com.example.ecommerceFinal.dtos.Requests.CartRequest;
+import com.example.ecommerceFinal.dtos.Requests.ProductLineCartTransfereDTO;
 import com.example.ecommerceFinal.dtos.Requests.ProductRequest;
 import com.example.ecommerceFinal.dtos.Responses.CartResponse;
 import com.example.ecommerceFinal.dtos.Responses.ProductResponse;
@@ -27,6 +28,11 @@ public class CartController {
     @PostMapping("/add")
     public void addCart(@RequestBody CartRequest cartRequest){
         cartService.addCart(cartRequest);
+    }
+
+    @PostMapping("/saveProductLinetoCart")
+    public void saveProductLineToCart(@RequestBody ProductLineCartTransfereDTO productLineCartTransfereDTO){
+        cartService.saveProductLineToCart(productLineCartTransfereDTO);
     }
 
     @GetMapping("")
